@@ -1,14 +1,14 @@
 <h2>.NET Developer Task</h2>
 <p>Create a console application to manage Visma’s resource shortage using .NET6. Requirements: </br>
 ● Command to register a new shortage. </br>
-○ All shortage information should be stored in JSON file. </br>
+- All shortage information should be stored in JSON file. </br>
 Application should retain data between restarts</br>
-○ Shortage model should contain the following properties:</br>
-■ Title</br>
-■ Name</br>
-■ Room (Fixed values - Meeting room / kitchen / bathroom)</br>
-■ Category (Fixed values - Electronics / Food / Other)</br>
-■ Priority (Number 1-10, 1 - not important, 10 - very </br>
+- Shortage model should contain the following properties:</br>
+- Title</br>
+- Name</br>
+- Room (Fixed values - Meeting room / kitchen / bathroom)</br>
+- Category (Fixed values - Electronics / Food / Other)</br>
+- Priority (Number 1-10, 1 - not important, 10 - very </br>
 important)</br>
 ■ CreatedOn (date request was created)</br>
 ○ If shortage is already added (Title and Room matches), do not 
