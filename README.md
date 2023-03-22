@@ -7,12 +7,12 @@ Shortage model should contain the following properties:</br>
     <li>Room (Fixed values - Meeting room / kitchen / bathroom)</li>
     <li>Category (Fixed values - Electronics / Food / Other)</li>
     <li>Priority (Number 1-10, 1 - not important, 10 - very important)</li> 
-    <li>CreatedOn (date request was created)</li></ul>
-○ If shortage is already added (Title and Room matches), do not  create new request but show a warning message. Though if the priority of new the request is higher, override the initial one</br>
+    <li>CreatedOn (date request was created)</li>
+    <li>If shortage is already added (Title and Room matches), do not  create new request but show a warning message. Though if the priority of new the request is higher, override the initial one</li></ul>
 ● Command to delete the request. Only the person who created or administrator can delete the request.</br>
 ● Command to list all the requests. </br>
-○ Administrator can see all the requests, other users are able to see only the ones they created</br>
-○ Add the following parameters to filter the data:</br>
+<p2>○ Administrator can see all the requests, other users are able to see only the ones they created</p2></br>
+<p2>○ Add the following parameters to filter the data:</p2></br>
 <ul><li>Filter by title (if the title is “wireless speaker”, searching  for “Speaker” should return this entry)</li>
 <li>Filter by CreatedOn date (e.g requests that was  registered between 2023-01-01 and 2023-02-01)</li>
 <li>Filter by Category</li>
@@ -23,4 +23,3 @@ Shortage model should contain the following properties:</br>
 <ul><li>Register new user</li>
 <li>Go to C: disk \temp folder and open user.json </li>
 <li>Changes user role from basic to Admin and save</li></ul>
-
