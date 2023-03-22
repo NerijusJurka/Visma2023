@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visma2023", "Visma2023\Visma2023.csproj", "{8E2820A6-0AA8-4B9B-AFAD-3A41A8384E61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E2820A6-0AA8-4B9B-AFAD-3A41A8384E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2820A6-0AA8-4B9B-AFAD-3A41A8384E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2820A6-0AA8-4B9B-AFAD-3A41A8384E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2820A6-0AA8-4B9B-AFAD-3A41A8384E61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5DAF642-33D3-41DE-AF7D-C77023A5241A}
+	EndGlobalSection
+EndGlobal
