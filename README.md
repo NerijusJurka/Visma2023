@@ -20,6 +20,6 @@ Shortage model should contain the following properties:</br>
 ○ Returned results should be listed with high priority on the top</br></p>
 <h4>Additional information</h4>
 <p>To use Admin role:</p>
-<ul><li>Register new user</li>
-<li>Go to C: disk \temp folder and open user.json </li>
-<li>Changes user role from basic to Admin and save</li></ul>
+<ol><li>Register new user</li>
+<li>Go to C: drive \temp folder and edit user.json </li>
+<li>Change user role from basic to Admin and save</li></ol>
