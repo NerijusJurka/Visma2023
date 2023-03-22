@@ -4,11 +4,11 @@
  All shortage information should be stored in JSON file. </br>
 Application should retain data between restarts</br>
  Shortage model should contain the following properties:</br>
-<li> Title</li></br>
-<li> Name</li></br>
-<li> Room (Fixed values - Meeting room / kitchen / bathroom)</li></br>
-<li> Category (Fixed values - Electronics / Food / Other)</li></br>
-<li> Priority (Number 1-10, 1 - not important, 10 - very </li></br>
+* Title</br>
+* Name</br>
+* Room (Fixed values - Meeting room / kitchen / bathroom)</br>
+* Category (Fixed values - Electronics / Food / Other)</br>
+* Priority (Number 1-10, 1 - not important, 10 - very
 important)</br>
 ■ CreatedOn (date request was created)</br>
 ○ If shortage is already added (Title and Room matches), do not 
