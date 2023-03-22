@@ -55,7 +55,7 @@ namespace Visma2023
                     else { needNew = false; }
                 }
             }
-            if (needNew == true) //Creating new shortage to json
+            if (needNew == true) //Creating new shortage request to json
             {
                     ShortageList.Add(new Shortage() { Title = shortage.Title, Name = shortage.Name, Room = shortage.Room,
                         Category = shortage.Category, Priority = shortage.Priority, CreatedOn = shortage.CreatedOn, CreatedBy = shortage.CreatedBy });// Add to list

@@ -2,7 +2,7 @@
 
 namespace Visma2023
 {
-    internal class AdminRequestViewFilter
+    class AdminRequestViewFilter
     {
         public static void Listing(string name, string role)
         {

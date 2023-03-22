@@ -1,7 +1,6 @@
 ﻿using Visma2023;
 internal class Program
-{ //sutvarkyti readline validations paimti is Request
-    // sutvarkyti Menu truksta commands arba blogai ivardinti ziureti interface
+{ 
     private static void Main(string[] args)
     {
         MenuInterface.StartUp();
