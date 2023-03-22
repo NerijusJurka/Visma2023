@@ -1,9 +1,8 @@
 <h2>.NET Developer Task</h2>
-<p>Create a console application to manage Visma’s resource shortage using 
-.NET6. Requirements: 
-● Command to register a new shortage. 
+<p>Create a console application to manage Visma’s resource shortage using .NET6. Requirements: 
+<p2>● Command to register a new shortage. 
 ○ All shortage information should be stored in JSON file. 
-Application should retain data between restarts
+Application should retain data between restarts</p2>
 ○ Shortage model should contain the following properties:
 ■ Title
 ■ Name
