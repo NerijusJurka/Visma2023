@@ -1,50 +1,56 @@
-﻿
-namespace Visma2023
+﻿namespace Visma2023
 {
     class MenuInterface
     {
         public static void Menu(string name, string role)
         {
             Console.Clear();
-            Console.WriteLine("Welcome: " + name + " role:" + role);
-            var consoleMenu = new List<string>();
-            consoleMenu.Add("1.Register a new shortage");
-            consoleMenu.Add("2.List all requests");
-            consoleMenu.Add("3.Exit");
-            foreach (var menu in consoleMenu)
+            Console.WriteLine($"Welcome: {name} role: {role}");
+            var consoleMenu = new List<string>
             {
-                Console.WriteLine(menu);
-            }
+                "1.Register a new shortage",
+                "2.List all requests",
+                "3.Exit"
+            };
+            consoleMenu.ForEach(Console.WriteLine);
         }
+
         public static void StartUp()
         {
             Console.Clear();
-            var consoleMenu = new List<string>();
-            consoleMenu.Add("1.Login");
-            consoleMenu.Add("2.Register");
-            consoleMenu.Add("3.Exit");
-            consoleMenu.Add(" ");
-            consoleMenu.Add("To use Admin register new user and change users role in user.json located in /temp folder ");
-            foreach (var menu in consoleMenu)
+            var consoleMenu = new List<string>
             {
-                Console.WriteLine(menu);
-            }
-        }
-        public static void ShortageMenu()
-        {
-            var consoleMenu = new List<string>();
-            consoleMenu.Add("");
-            consoleMenu.Add("1.Filter by Title");
-            consoleMenu.Add("2.Filter by CreatedOn");
-            consoleMenu.Add("3.Filter by Category");
-            consoleMenu.Add("4.Filter by Room");
-            consoleMenu.Add("5.Remove Request");
-            consoleMenu.Add("6.Exit");
-            foreach (var menu in consoleMenu)
-            {
-                Console.WriteLine(menu);
-            }
+                "1.Login",
+                "2.Register",
+                "3.Exit",
+                " ",
+                "To use Admin register new user and change users role in user.json located in /temp folder"
+            };
+            consoleMenu.ForEach(Console.WriteLine);
         }
 
+        public static int ShortageMenu()
+        {
+            Console.Clear();
+            var consoleMenu = new List<string>
+            {
+                "",
+                "1.Filter by Title",
+                "2.Filter by CreatedOn",
+                "3.Filter by Category",
+                "4.Filter by Room",
+                "5.Remove Request",
+                "6.Exit"
+            };
+            consoleMenu.ForEach(Console.WriteLine);
+
+            int command;
+            while (!int.TryParse(Console.ReadLine(), out command))
+            {
+                Console.WriteLine("Invalid input. Please enter a number.");
+            }
+
+            return command;
+        }
     }
 }

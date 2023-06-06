@@ -1,59 +1,84 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Visma2023
 {
     class Registration
     {
-        public static async void RegistrationToSystem()
-        {
-             User user = new User();
-            Console.Clear();
-            Console.WriteLine("REGISTRATION");
-            Console.WriteLine("Please Enter your UserName");
-             user.Name = Request.GetInput(user.Name);
+        private const string UserFilePath = @"C:\temp\user.json";
 
-             Console.WriteLine("Please Enter your password");
-             user.Password = Request.GetInput(user.Password);
-             user.Role = "Basic";
-            bool exits = false;
-            string filePath = @"C:\temp\user.json";
-            var jsonData = System.IO.File.ReadAllText(filePath);//Read File
-            var UserList = JsonConvert.DeserializeObject<List<User>>(jsonData) ?? new List<User>();//Deserialize
-            exits = CheckIfExist(user.Name,jsonData,exits);
-            if (exits == true)
+        public static async Task RegistrationToSystemAsync()
+        {
+            User user = new User();
+            Console.Clear();
+            Console.WriteLine("========== REGISTRATION ==========");
+            Console.Write("Please enter your desired username: ");
+            user.Name = Request.GetInput(user.Name);
+
+            Console.Write("Please enter your password: ");
+            user.Password = Request.GetInput(user.Password);
+
+            user.Role = "Basic";
+            user.Id = Guid.NewGuid().GetHashCode();
+
+            if (!File.Exists(UserFilePath))
+            {
+                File.Create(UserFilePath).Dispose();
+            }
+
+            bool exists = await CheckIfExistAsync(user.Name);
+
+            if (exists)
             {
                 Console.Clear();
-                Console.WriteLine("Username already taken");
-                RegistrationToSystem();
-                
+                Console.WriteLine("Username already taken. Please choose a different one.");
+                await RegistrationToSystemAsync();
             }
-            else if (exits == false)
+            else
             {
-                UserList.Add(new User() {Name = user.Name, Password = user.Password, Role = user.Role });// Add to list
-                var opt = new JsonSerializerOptions() { WriteIndented = true };
-                jsonData = JsonConvert.SerializeObject(UserList);//serialize
-                System.IO.File.WriteAllText(filePath, jsonData);
-                Login.LoginToSystem();
-            }
-        }
-        public static bool CheckIfExist(string name,string? jsonData,bool exits)//Checking if username is taken or not if taken returns true
-        {
-            var result = System.Text.Json.JsonSerializer.Deserialize<User[]>(jsonData);
-            var username = from item in result where item.Name == name select item.Name;
-            foreach(var x in  username)
-            {
-                if (name == x)
+                List<User> userList = new List<User>();
+                string jsonData = await File.ReadAllTextAsync(UserFilePath);
+                if (!string.IsNullOrWhiteSpace(jsonData))
                 {
-                    exits = true;
-                    break;
+                    userList = JsonConvert.DeserializeObject<List<User>>(jsonData);
                 }
+
+                userList.Add(user);
+                jsonData = JsonConvert.SerializeObject(userList, Formatting.Indented);
+                await File.WriteAllTextAsync(UserFilePath, jsonData);
+
+                Console.Clear();
+                Console.WriteLine("Registration successful!");
+                Console.WriteLine("Press any key to continue to login...");
+                Console.ReadKey();
+
+                await Login.LoginToSystemAsync();
             }
-            if (username == null) 
-            {
-                exits = false;
-            }
-            return exits;
         }
-    } 
+
+        public static async Task<bool> CheckIfExistAsync(string name)
+        {
+            try
+            {
+                string jsonData = await File.ReadAllTextAsync(UserFilePath);
+                if (!string.IsNullOrWhiteSpace(jsonData))
+                {
+                    var username = JsonConvert.DeserializeObject<List<User>>(jsonData)
+                        .Where(u => u.Name == name)
+                        .Select(u => u.Name);
+                    return username.Count() > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking if username exists: {ex.Message}");
+                return false;
+            }
+        }
+    }
 }

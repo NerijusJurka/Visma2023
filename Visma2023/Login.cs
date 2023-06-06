@@ -1,50 +1,64 @@
 ﻿using Newtonsoft.Json;
+using Visma2023;
 
-namespace Visma2023
+class Login
 {
-    class Login
+    public static User AuthenticatedUser { get; private set; }
+
+    public static async Task<bool> LoginToSystemAsync()
     {
-        public static void LoginToSystem()
+        bool check = false;
+        do
         {
-            bool check = false;
-            do
+            Console.Clear();
+            Console.WriteLine("========== LOGIN ==========");
+            Console.Write("Enter your username: ");
+            string username = Console.ReadLine();
+
+            Console.Write("Enter your password: ");
+            string password = ReadPassword();
+
+            string path = @"C:\temp\user.json";
+            var jsonData = File.ReadAllText(path);
+            var userList = JsonConvert.DeserializeObject<List<User>>(jsonData) ?? new List<User>();
+
+            foreach (var user in userList)
             {
-                Console.Clear();
-                Console.WriteLine("LOGIN");
-                Console.WriteLine("Please enter your login name: ");
-                string name = Console.ReadLine();
-
-                Console.Clear();
-                Console.WriteLine("Please enter your login password");
-                string password = Console.ReadLine();
-                string path = @"C:\temp\user.json";
-
-                var jsonData = System.IO.File.ReadAllText(path);//Read File
-                var UserList = JsonConvert.DeserializeObject<List<User>>(jsonData) ?? new List<User>();//Deserialize
-                for (int i = 0; i < UserList.Count; i++)
+                if (user.Name == username && user.Password == password)
                 {
-                    if (name == UserList[i].Name && password == UserList[i].Password)
-                    {
-                        check = true;
-                        if (UserList[i].Role == "Basic")
-                        {
-                            Program.UserMenu(UserList[i].Name,UserList[i].Role);
-                            break;
-                        }
-                        if (UserList[i].Role == "Admin")
-                        {
-                            Program.UserMenu(UserList[i].Name, UserList[i].Role);
-                            break;
-                        }
-                    }
-                    else if (name != UserList[i].Name || password != UserList[i].Password)
-                    {
-                        Console.WriteLine("Incorrect Name or Password");
-                    }
+                    check = true;
+                    AuthenticatedUser = user;
+                    break;
                 }
             }
-            while (check == false);
 
-        }
+            if (!check)
+            {
+                Console.WriteLine("\nIncorrect username or password. Press ESC to exit or any other key to try again.");
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                    Environment.Exit(0);
+            }
+
+        } while (!check);
+
+        return true;
+    }
+
+    private static string ReadPassword()
+    {
+        string password = "";
+        ConsoleKeyInfo keyInfo;
+
+        do
+        {
+            keyInfo = Console.ReadKey(true);
+            if (keyInfo.Key != ConsoleKey.Enter && keyInfo.Key != ConsoleKey.Escape)
+            {
+                password += keyInfo.KeyChar;
+                Console.Write("*");
+            }
+        } while (keyInfo.Key != ConsoleKey.Enter);
+
+        return password;
     }
 }

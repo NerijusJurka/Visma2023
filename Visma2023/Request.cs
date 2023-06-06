@@ -1,10 +1,25 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
+using Visma2023;
 
 namespace Visma2023
 {
-     class Request
-     {
+    enum Room
+    {
+        Meeting_room,
+        Kitchen,
+        Bathroom
+    }
+
+    enum Category
+    {
+        Electronics,
+        Food,
+        Other
+    }
+    class Request
+    {
         public static void ShortageRequest(string name, string role)//Create Shortage request
         {
             Shortage shortage = new Shortage();
@@ -40,7 +55,7 @@ namespace Visma2023
                 if (ShortageList[i].Title == shortage.Title && ShortageList[i].Room == shortage.Room)
                 {
                     Console.Clear();
-                    Console.WriteLine("This Shortage already exist. Do you want to update it ? Y/N");
+                    Console.WriteLine("This Shortage already exists. Do you want to update it ? Y/N");
                     string a = " ";
                     a = GetInput(a);
                     if (a == "Y")
@@ -57,106 +72,92 @@ namespace Visma2023
             }
             if (needNew == true) //Creating new shortage request to json
             {
-                    ShortageList.Add(new Shortage() { Title = shortage.Title, Name = shortage.Name, Room = shortage.Room,
-                        Category = shortage.Category, Priority = shortage.Priority, CreatedOn = shortage.CreatedOn, CreatedBy = shortage.CreatedBy });// Add to list
-                    var opt = new JsonSerializerOptions() { WriteIndented = true };
-                    jsonData = JsonConvert.SerializeObject(ShortageList);//serialize
-                    System.IO.File.WriteAllText(filePath, jsonData);
-                    Program.UserMenu(name, role);
+                ShortageList.Add(new Shortage()
+                {
+                    Title = shortage.Title,
+                    Name = shortage.Name,
+                    Room = shortage.Room,
+                    Category = shortage.Category,
+                    Priority = shortage.Priority,
+                    CreatedOn = shortage.CreatedOn,
+                    CreatedBy = shortage.CreatedBy
+                });// Add to list
+                var opt = new JsonSerializerSettings() { Formatting = Formatting.Indented };
+                jsonData = JsonConvert.SerializeObject(ShortageList, opt);//serialize
+                System.IO.File.WriteAllText(filePath, jsonData);
+                Program.UserMenu(name, role);
             }
 
             jsonData = JsonConvert.SerializeObject(ShortageList);//serialize
             System.IO.File.WriteAllText(filePath, jsonData);
             Program.UserMenu(name, role);
-
-            string RoomMenu()
-            {
-
-                Console.WriteLine("Please pick from the list:\n\n");
-                foreach (var room in Enum.GetValues(typeof(Room)))
-                {
-                    Console.WriteLine($"{(int)room} - {room}");
-                }
-                Console.Write("\n\nEnter Choice > ");
-                var result = Console.ReadLine();
-
-                var choice = 0;
-                Int32.TryParse(result, out choice);
-                Room choice1 = (Room)choice;
-                string t = choice1.ToString();
-                return t;
-            }
-            string CategoryMenu()
-            {
-                int n = 0;
-                Console.WriteLine("Please pick from the list:\n\n");
-                foreach (var category in Enum.GetValues(typeof(Category)))
-                {
-                    Console.WriteLine($"{(int)category} - {category}");
-                }
-                var result = Console.ReadLine();               
-
-                var choice = 0;
-                Int32.TryParse(result, out choice);
-                Category choice1 = (Category)choice;
-                string r = choice1.ToString();
-                return r;
-            }
-            int PriorityCheck()
-            {
-                Console.WriteLine("Please choose number for priority level 1-10");
-                string input = Console.ReadLine();
-                int choice;
-                Int32.TryParse(input, out choice);
-                if (choice <= 0)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Invalid range scope");
-                    PriorityCheck();
-                    return 0;
-                }
-                if (choice > 10)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Invalid range scope");
-                    PriorityCheck();
-                    return 0;
-                }
-                else
-                {
-                    return choice;
-                }
-            }
-
         }
-        public static string GetInput(string Prompt)//Readline Cannot be null or empty validation
+
+        static string RoomMenu()
         {
-            string Result = "";
+
+            Console.WriteLine("Please pick from the list:\n\n");
+            foreach (var room in Enum.GetValues(typeof(Room)))
+            {
+                Console.WriteLine($"{(int)room} - {room}");
+            }
+            Console.Write("\n\nEnter Choice > ");
+            var result = Console.ReadLine();
+
+            var choice = 0;
+            Int32.TryParse(result, out choice);
+            Room choice1 = (Room)choice;
+            string t = choice1.ToString();
+            return t;
+        }
+
+        static string CategoryMenu()
+        {
+            int n = 0;
+            Console.WriteLine("Please pick from the list:\n\n");
+            foreach (var category in Enum.GetValues(typeof(Category)))
+            {
+                Console.WriteLine($"{(int)category} - {category}");
+            }
+            var result = Console.ReadLine();
+
+            var choice = 0;
+            Int32.TryParse(result, out choice);
+            Category choice1 = (Category)choice;
+            string r = choice1.ToString();
+            return r;
+        }
+        static int PriorityCheck()
+        {
+            Console.WriteLine("Please pick the priority level (0-10):");
+
+            var result = Console.ReadLine();
+            var choice = 0;
+            Int32.TryParse(result, out choice);
+
+            if (choice >= 0 && choice <= 10)
+            {
+                return choice;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a number between 0 and 10.");
+                return PriorityCheck();
+            }
+        }
+        public static string GetInput(string prop)
+        {
+            string result;
             do
             {
-                Console.Write(Prompt + ": ");
-                Result = Console.ReadLine();
-                if (string.IsNullOrEmpty(Result))
+                result = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(result))
                 {
-                    Console.WriteLine("Empty input, please try again");
+                    Console.Clear();
+                    Console.WriteLine($"{prop} cannot be empty. Please try again:");
                 }
-            } while (string.IsNullOrEmpty(Result));
-            return Result;
-        }
-
-        //Fixed Values
-        public enum Room
-        {
-            Meeting_Room,
-            Kitchen,
-            Bathroom
-
-        }
-        public enum Category
-        {
-            Electronics,
-            Food,
-            Other
+            } while (string.IsNullOrWhiteSpace(result));
+            return result;
         }
     }
 }

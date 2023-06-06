@@ -1,0 +1,17 @@
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Visma2023.exe
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Visma2023.deps.json
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Visma2023.runtimeconfig.json
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Visma2023.dll
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Visma2023.pdb
+C:\Users\jurka\source\repos\Visma2023\Visma2023\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.csproj.AssemblyReference.cache
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.AssemblyInfoInputs.cache
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.AssemblyInfo.cs
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.csproj.CoreCompileInputs.cache
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.csproj.CopyComplete
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.dll
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\refint\Visma2023.dll
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.pdb
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\Visma2023.genruntimeconfig.cache
+C:\Users\jurka\source\repos\Visma2023\Visma2023\obj\Debug\net6.0\ref\Visma2023.dll
